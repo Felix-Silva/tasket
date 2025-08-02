@@ -1,41 +1,18 @@
-// screens/HomeScreen.js
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, Button, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-export default function HomeScreen() {
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    loadNotes();
-  }, []);
-
-  const loadNotes = async () => {
-    const data = await AsyncStorage.getItem('notes');
-    if (data) setNotes(JSON.parse(data));
-  };
-
-  const saveNotes = async (newNotes) => {
-    await AsyncStorage.setItem('notes', JSON.stringify(newNotes));
-    setNotes(newNotes);
-  };
-
+export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <FlatList
-        data={notes}
-        keyExtractor={(_, i) => i.toString()}
-        renderItem={({ item }) => (
-          <Text style={styles.item}>{item}</Text>
-        )}
-      />
-      <Button
-        title="Add Note"
-        onPress={() => {
-          const newNotes = [...notes, `note ${notes.length + 1}`];
-          saveNotes(newNotes);
-        }}
-      />
+      <View style={styles.column}>
+        <Pressable style={styles.block} onPress={() => navigation.navigate('Notes')}>
+          <Text style={styles.blockText}>📝 Notes</Text>
+        </Pressable>
+
+        <Pressable style={styles.block} onPress={() => navigation.navigate('ToDo')}>
+          <Text style={styles.blockText}>✅ To-Do</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -43,12 +20,38 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff8dc', // legal pad
     padding: 20,
-    backgroundColor: '#474747ff'
-    },
-  item: {
-    fontSize: 18,
-    padding: 8,
-    borderBottomWidth: 1
-},
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
+    color: '#333',
+  },
+  column: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  block: {
+    backgroundColor: '#ffeb85', // deeper yellow
+    marginVertical: 10,
+    paddingVertical: 80,
+    paddingHorizontal: 30,
+    borderRadius: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 4,
+    width: '80%',
+    alignItems: 'center',
+  },
+  blockText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
 });
