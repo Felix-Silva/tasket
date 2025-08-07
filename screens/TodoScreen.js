@@ -1,10 +1,33 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function TodoScreen() {
+export default function NotesScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>To-Do List</Text>
+    <View style={styles.container}>
+      <View style={styles.item}>
+        <Text style={styles.text}>To-Do lists will appear here.</Text>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#2c2c2c',
+    padding: 20,
+  },
+  item: {
+    backgroundColor: '#3c3c3c',
+    padding: 16,
+    marginBottom: 12,
+    borderRadius: 10,
+  },
+  text: {
+    color: '#fff9c4',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
