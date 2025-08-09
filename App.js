@@ -9,11 +9,11 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    
     <NavigationContainer theme={DarkTheme}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          headerStyle: { backgroundColor: '#2c2c2c' },
-          headerTintColor: '#fff9c4',
+          headerShown: false, // disable header
           tabBarStyle: { backgroundColor: '#2c2c2c', borderTopColor: '#3c3c3c' },
           tabBarActiveTintColor: '#ffeb85',
           tabBarInactiveTintColor: '#bbb',
@@ -26,7 +26,7 @@ export default function App() {
               iconName = 'checkmark-done-outline';
             }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return <Ionicons name={iconName} size={size} color={color} />;w
           },
         })}
       >
