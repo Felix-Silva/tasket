@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 
-export default function TodoScreen() {
+export default function TodoHomeScreen() {
   const [ToDos, setToDos] = useState([
       { id: '1', text: 'What To Do' },
       { id: '2', text: 'List of Books' },
