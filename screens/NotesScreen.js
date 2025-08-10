@@ -5,7 +5,9 @@ export default function NotesScreen() {
   const [notes, setNotes] = useState([
     { id: '1', text: 'Groceries List' },
     { id: '2', text: 'Restaurant Orders' },
-    { id: '3', text: 'Movie Watchlist' },
+    { id: '3', text: 'Achievement Hunting' },
+    { id: '4', text: 'Speaker Notes' },
+    { id: '5', text: 'Jak and Daxter Collectibles' },
   ]);
 
   const renderItem = ({ item }) => (
