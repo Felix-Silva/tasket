@@ -10,18 +10,18 @@ export default function NoteHomeScreen({ navigation }) {
     const newId = Date.now().toString();
 
     navigation.navigate('NoteScreen', {
-      note: { id: newId, text: '' }, // empty text for new note
-      updateNote: (updatedText) => {
+      note: { id: newId, title: '', text: '' }, // empty text for new note
+      updateNote: (title, text) => {
         setNotes((prev) => {
           // if note already exists, update it
           const exists = prev.find((n) => n.id === newId);
           if (exists) {
             return prev.map((n) =>
-              n.id === newId ? { ...n, text: updatedText } : n
+              n.id === newId ? { ...n, title, text } : n
             );
           }
           // otherwise add a new note
-          return [...prev, { id: newId, text: updatedText }];
+          return [...prev, { id: newId, title, text }];
         });
       },
     });
@@ -33,26 +33,22 @@ export default function NoteHomeScreen({ navigation }) {
       onPress={() =>
         navigation.navigate('NoteScreen', {
           note: item,
-          updateNote: (updatedText) => {
+          updateNote: (title, text) => {
             setNotes((prev) =>
               prev.map((n) =>
-                n.id === item.id ? { ...n, text: updatedText } : n
+                n.id === item.id ? { ...n, title, text } : n
               )
             );
           },
         })
       }
     >
-      <Text style={styles.text}>{item.text}</Text>
+      <Text style={styles.text}>{item.title || '(Untitled)'}</Text>
     </Pressable>
   );
 
   return (
     <View style={styles.container}>
-      <Button mode="contained" onPress={addNote} style={styles.addButton} labelStyle={{color: '#2c2c2c', fontWeight:'bold'}}>
-        Add Note
-      </Button>
-
       <FlatList
         data={notes}
         keyExtractor={(item) => item.id}
@@ -62,6 +58,9 @@ export default function NoteHomeScreen({ navigation }) {
           <Text style={styles.emptyText}>No notes yet. Add one!</Text>
         }
       />
+      <Button mode="contained" onPress={addNote} style={styles.addButton} labelStyle={{color: '#2c2c2c', fontWeight:'bold'}}>
+        Add Note
+      </Button>
     </View>
   );
 }
