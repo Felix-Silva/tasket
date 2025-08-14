@@ -57,13 +57,18 @@ export default function NoteScreen({ route, navigation }) {
               'keyboard-close',
             ]}
             iconMap={{
-              'keyboard-close': () => <Icon name="keyboard-close" size={24} color="#fff9c4"/>,
-            }}
-            onPress={(action) => {
-              if (action === 'keyboard-close') {
-                Keyboard.dismiss();
-                richText.current?.blurContentEditor();
-              }
+              'keyboard-close': () => (
+                <Icon
+                  name="keyboard-close"
+                  size={24}
+                  color="#fff9c4"
+                  onPress={() => {
+                    console.log('Keyboard-close pressed');
+                    richText.current?.blurContentEditor();
+                    Keyboard.dismiss();
+                  }}
+                />
+              ),
             }}
           />
         </View>
